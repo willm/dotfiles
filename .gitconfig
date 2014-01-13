@@ -1,0 +1,12 @@
+[color]
+	ui = true
+[user]
+	name = Will Munn
+	email = willmunn@hotmail.com
+[core]
+	editor = vim
+	autocrlf = false
+[help]
+	autocorrect = 1
+[push]
+	default = matching
