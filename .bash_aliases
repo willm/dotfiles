@@ -19,10 +19,12 @@ alias cls='clear'
 
 #pretty print and syntax highlight xml
 curl-xml(){
-	curl ${1} -H'Accept: application/xml' | xmllint --format - | pygmentize -l xml
+	curl ${@} -H'Accept: application/xml' | xmllint --format - | pygmentize -l xml
 }
 
 #pretty print and syntax highlight json
 curl-json() {
-    curl ${1} -H'Accept: application/json' | json_pp | pygmentize -l json
+    curl ${@} -H'Accept: application/json' | json_pp | pygmentize -l json
 }
+
+alias start='nautilus'
