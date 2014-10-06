@@ -13,6 +13,9 @@ set nobackup "don't create ~ and swp files"
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 execute pathogen#infect()
-" Enable saving readonly files with sudo
+" Enable saving readonly files with sudo"
 cmap w!! %!sudo tee > /dev/null %
 colorscheme 256-grayvim
+
+"\s shortcut - replace current word"
+:nnoremap \s :%s/\<<C-r><C-w>\>/
