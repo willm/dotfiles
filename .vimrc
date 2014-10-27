@@ -19,3 +19,7 @@ colorscheme 256-grayvim
 
 "\s shortcut - replace current word"
 :nnoremap \s :%s/\<<C-r><C-w>\>/
+
+set listchars=tab:▸▸,trail:- "nicer whitespace chars
+set list " show whitespace
+set mouse=nv " allow mouse
