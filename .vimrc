@@ -24,3 +24,4 @@ colorscheme 256-grayvim
 set listchars=tab:▸▸,trail:- "nicer whitespace chars
 set list " show whitespace
 set mouse=nv " allow mouse
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
