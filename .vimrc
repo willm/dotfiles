@@ -24,6 +24,7 @@ colorscheme 256-grayvim
 set listchars=tab:▸▸,trail:- "nicer whitespace chars
 set list " show whitespace
 set mouse=nv " allow mouse
+
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 "Close vim if NERDTree is the only open buffer"
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -31,3 +32,6 @@ imap qq <esc>a<Plug>snipMateNextOrTrigger
 smap qq <Plug>snipMateNextOrTrigger
 "map jj to escape in insert mode"
 imap jj <Esc>
+
+set exrc
+set secure
