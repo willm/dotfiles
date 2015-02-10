@@ -1,11 +1,11 @@
-filetype plugin indent on
-set autoindent
 set number "view line numbers"
 set background=dark
 set tabstop=4 "spaces per tab"
 set shiftwidth=4
 "treat Jakefiles as JS syntax"
 au BufNewFile,BufRead *Jakefile set filetype=javascript
+"treat handlebars as html"
+au BufNewFile,BufRead *.handlebars set filetype=html
 set complete+=k
 set dictionary+=~/.dictionary
 set nobackup "don't create ~ and swp files"
@@ -31,6 +31,10 @@ noremap <Right> <NOP>
 set listchars=tab:▸▸,trail:- "nicer whitespace chars
 set list " show whitespace
 set mouse=nv " allow mouse
+
+filetype plugin indent on
+set autoindent
+
 let g:syntastic_auto_jump = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_aggregate_errors = 1 
