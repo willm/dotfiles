@@ -28,6 +28,9 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
+set colorcolumn=80 " Show 80 char column in light grey
+highlight ColorColumn ctermbg=236
+
 set listchars=tab:▸▸,trail:- "nicer whitespace chars
 set list " show whitespace
 set mouse=nv " allow mouse
