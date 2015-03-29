@@ -22,6 +22,13 @@ colorscheme 256-grayvim
 :nnoremap \s :%s/\<<C-r><C-w>\>/
 :nmap <F2> :NERDTreeToggle<CR>
 
+"easily switch between buffers influenced by unimpaired"
+:nmap [b :bp<CR>
+:nmap ]b :bn<CR>
+"list buffers and select active one"
+:nmap bl :ls<CR>:b
+set hidden "allow hidden buffers"
+
 "no arrows!"
 noremap <Up> <NOP>
 noremap <Down> <NOP>
