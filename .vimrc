@@ -42,6 +42,9 @@ set listchars=tab:▸▸,trail:- "nicer whitespace chars
 set list " show whitespace
 set mouse=nv " allow mouse
 
+"search case insensitive unless caps"
+set ignorecase
+set smartcase
 filetype plugin indent on
 set autoindent
 
