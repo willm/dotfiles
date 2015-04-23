@@ -21,7 +21,16 @@ colorscheme 256-grayvim
 "\s shortcut - replace current word"
 :nnoremap \s :%s/\<<C-r><C-w>\>/
 :nmap <F2> :NERDTreeToggle<CR>
-:nmap <F5> :!jscs -x .<CR>:e<CR>
+
+"Jscs autofix
+function! JscsFix()
+    let l:winview = winsaveview()
+    % ! jscs -x
+    call winrestview(l:winview)
+endfunction
+command JscsFix :call JscsFix()
+autocmd BufWritePre *.js JscsFix
+:noremap <F5> :JscsFix<CR>
 
 "easily switch between buffers influenced by unimpaired"
 :nmap [b :bp<CR>
