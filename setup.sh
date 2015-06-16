@@ -38,7 +38,7 @@ add_repositories(){
 	sudo apt-get update
 }
 
-packages=(vim git git-gui guake clementine hal hal-info flashplugin-nonfree python-software-properties python g++ make curl python-pygments)
+packages=(vim-gtk git git-gui guake clementine hal hal-info flashplugin-nonfree python-software-properties python g++ make curl python-pygments)
 
 add_repositories
 sudo apt-get remove -y -q rhythmbox thunderbird sudo remove unity-lens-shopping
