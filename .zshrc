@@ -81,3 +81,4 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 alias ack=ack-grep
 alias tmux="tmux -2"
 alias cls=clear
+alias "git commit"="git commit --verbose"
