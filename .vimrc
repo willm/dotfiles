@@ -11,7 +11,6 @@ set dictionary+=~/.dictionary
 set nobackup "don't create ~ and swp files"
 
 "start nerdtree automatically"
-autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 execute pathogen#infect()
 " Enable saving readonly files with sudo"
@@ -35,7 +34,7 @@ command JscsFix :call JscsFix()
 :nmap [b :bp<CR>
 :nmap ]b :bn<CR>
 "list buffers and select active one"
-:nmap bl :ls<CR>:b
+:nmap :bl :ls<CR>:b
 set hidden "allow hidden buffers"
 
 "no arrows!"
