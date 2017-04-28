@@ -9,6 +9,7 @@ au BufNewFile,BufRead *.handlebars set filetype=html
 set complete+=k
 set dictionary+=~/.dictionary
 set nobackup "don't create ~ and swp files"
+set backspace=indent,eol,start
 
 "start nerdtree automatically"
 autocmd VimEnter * wincmd p
@@ -54,6 +55,8 @@ set mouse=nv " allow mouse
 set ignorecase
 set smartcase
 filetype plugin indent on
+set term=xterm-256color
+syntax on
 set autoindent
 
 let g:syntastic_auto_jump = 1
