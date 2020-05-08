@@ -1,4 +1,5 @@
 set number "view line numbers"
+set expandtab
 set background=dark
 set tabstop=4 "spaces per tab"
 set shiftwidth=4
