@@ -12,25 +12,18 @@ set dictionary+=~/.dictionary
 set nobackup "don't create ~ and swp files"
 set backspace=indent,eol,start
 
+let NERDTreeIgnore=['.pyc$']
+set wildignore+=*.pyc
 "start nerdtree automatically"
 autocmd VimEnter * wincmd p
 execute pathogen#infect()
 " Enable saving readonly files with sudo"
 cmap w!! %!sudo tee > /dev/null %
-colorscheme 256-grayvim
+colorscheme wombat256
 
 "\s shortcut - replace current word"
 :nnoremap \s :%s/\<<C-r><C-w>\>/
 :map <F2> :NERDTreeToggle<CR>
-
-"Jscs autofix
-function! JscsFix()
-    let l:winview = winsaveview()
-    % ! jscs -x
-    call winrestview(l:winview)
-endfunction
-command JscsFix :call JscsFix()
-:noremap <F5> :JscsFix<CR>
 
 "easily switch between buffers influenced by unimpaired"
 :nmap [b :bp<CR>
