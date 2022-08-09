@@ -38,6 +38,8 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
+noremap <C-p> :FZF<CR>
+
 set colorcolumn=80 " Show 80 char column in light grey
 highlight ColorColumn ctermbg=236
 
@@ -49,13 +51,16 @@ set mouse=nv " allow mouse
 set ignorecase
 set smartcase
 filetype plugin indent on
-set term=xterm-256color
+"set term=xterm-256color
 syntax on
 set autoindent
 
 let g:syntastic_auto_jump = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_aggregate_errors = 1 
+"let g:syntastic_html_tidy_exec = 'tidy5'
+
+let g:ctrlp_user_command = 'find %s -type f | grep -v node_modules/ | grep -v env/ | grep -v ".git/" | grep -v ".pyc"'
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 "Close vim if NERDTree is the only open buffer"
@@ -64,6 +69,13 @@ imap qq <esc>a<Plug>snipMateNextOrTrigger
 smap qq <Plug>snipMateNextOrTrigger
 "map jj to escape in insert mode"
 imap jj <Esc>
+
+let g:neoformat_try_node_exe = 1
+autocmd BufWritePre *.js,*.ts Neoformat
+
+autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+
+set rtp+=/usr/local/opt/fzf
 
 set exrc
 set secure

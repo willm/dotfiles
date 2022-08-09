@@ -2,12 +2,23 @@
 	ui = true
 [user]
 	name = Will Munn
-	email = willmunn@hotmail.com
+	email = will.munn@focusrite.com
 [core]
-	editor = vim
+	editor = vim -u NONE
 	autocrlf = false
-	excludesfile = ~/.gitignore
+	excludesfile = /Users/will.munn/.gitignore_global
 [help]
 	autocorrect = 1
 [push]
-	default = matching
+	default = current
+[rebase]
+	instructionFormat = (%an <%ae>) %s
+[alias]
+    am = commit --amend --no-edit
+	fixup = commit --amend --no-edit
+[pull]
+	rebase = false
+[init]
+	defaultBranch = main
+[oh-my-zsh]
+	hide-dirty = 1
