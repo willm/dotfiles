@@ -71,9 +71,17 @@ smap qq <Plug>snipMateNextOrTrigger
 imap jj <Esc>
 
 let g:neoformat_try_node_exe = 1
-autocmd BufWritePre *.js,*.ts Neoformat
+"autocmd BufWritePre *.js,*.ts Neoformat
 
 autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" leader is \
+nmap <leader>rn <Plug>(coc-rename)
 
 set rtp+=/usr/local/opt/fzf
 
