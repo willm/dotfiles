@@ -22,3 +22,5 @@
 	defaultBranch = main
 [oh-my-zsh]
 	hide-dirty = 1
+[rerere]
+	enabled = true
