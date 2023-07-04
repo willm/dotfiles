@@ -58,11 +58,9 @@ set autoindent
 let g:syntastic_auto_jump = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_aggregate_errors = 1 
-"let g:syntastic_html_tidy_exec = 'tidy5'
 
 let g:ctrlp_user_command = 'find %s -type f | grep -v node_modules/ | grep -v env/ | grep -v ".git/" | grep -v ".pyc"'
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 "Close vim if NERDTree is the only open buffer"
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 imap qq <esc>a<Plug>snipMateNextOrTrigger
@@ -82,6 +80,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 " leader is \
 nmap <leader>rn <Plug>(coc-rename)
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 set rtp+=/usr/local/opt/fzf
 
