@@ -64,6 +64,9 @@ local plugins = {
   },
 
   "MunifTanjim/nui.nvim",
+  "dcampos/nvim-snippy",
+  'dcampos/cmp-snippy',
+  'mhartington/formatter.nvim',
   "nvim-lua/plenary.nvim",
   "nvim-tree/nvim-web-devicons",
   "nvim-neo-tree/neo-tree.nvim",
@@ -75,7 +78,7 @@ local plugins = {
         enable_diagnostics = true,
         open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
         sort_case_insensitive = false, -- used when sorting files and directories in the tree
-        sort_function = nil , -- use a custom function for sorting files and directories in the tree 
+        sort_function = nil , -- use a custom function for sorting files and directories in the tree
         -- sort_function = function (a,b)
         --       if a.type == b.type then
         --           return a.path > b.path
@@ -147,9 +150,9 @@ local plugins = {
             nowait = true,
           },
           mappings = {
-            ["<space>"] = { 
-                "toggle_node", 
-                nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use 
+            ["<space>"] = {
+                "toggle_node",
+                nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
             },
             ["<2-LeftMouse>"] = "open",
             ["<cr>"] = "open",
@@ -169,7 +172,7 @@ local plugins = {
             -- ['C'] = 'close_all_subnodes',
             ["z"] = "close_all_nodes",
             --["Z"] = "expand_all_nodes",
-            ["a"] = { 
+            ["a"] = {
               "add",
               -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
               -- some commands may take optional config options, see `:h neo-tree-mappings` for details
@@ -340,6 +343,76 @@ telescope.setup({
     },
   },
 })
+
+local util = require "formatter.util"
+local function format_prettier()
+   return {
+     exe = "prettierd",
+     args = {vim.api.nvim_buf_get_name(0)},
+     stdin = true
+   }
+end
+
+-- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
+local formatter = require("formatter")
+formatter.setup {
+  -- Enable or disable logging
+  logging = true,
+  -- Set the log level
+  log_level = vim.log.levels.WARN,
+  -- All formatter configurations are opt-in
+  filetype = {
+    -- Formatter configurations for filetype "lua" go here
+    -- and will be executed in order
+    javascript = {format_prettier},
+    typescript = {format_prettier},
+    lua = {
+      -- "formatter.filetypes.lua" defines default configurations for the
+      -- "lua" filetype
+      require("formatter.filetypes.lua").stylua,
+
+      -- You can also define your own configuration
+      function()
+        -- Supports conditional formatting
+        if util.get_current_buffer_file_name() == "special.lua" then
+          return nil
+        end
+
+        -- Full specification of configurations is down below and in Vim help
+        -- files
+        return {
+          exe = "stylua",
+          args = {
+            "--search-parent-directories",
+            "--stdin-filepath",
+            util.escape_path(util.get_current_buffer_file_path()),
+            "--",
+            "-",
+          },
+          stdin = true,
+        }
+      end
+    },
+
+    -- Use the special "*" filetype for defining formatter configurations on
+    -- any filetype
+    ["*"] = {
+      -- "formatter.filetypes.any" defines default configurations for any
+      -- filetype
+      require("formatter.filetypes.any").remove_trailing_whitespace
+    }
+  }
+}
+
+vim.api.nvim_create_autocmd(
+  {"BufWritePost"},
+   { pattern = "*",
+    callback = function()
+      vim.cmd("FormatWrite")
+    end,
+    desc = "Format on save"
+  }
+)
 
 require('remaps')
 vim.opt.expandtab = true
