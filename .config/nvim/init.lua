@@ -313,7 +313,22 @@ local plugins = {
   end,
   "nvim-telescope/telescope.nvim",
   tag = "0.1.2",
-  "nvim-treesitter/nvim-treesitter",
+  {
+    "nvim-treesitter/nvim-treesitter",
+    config = function()
+      local configs = require("nvim-treesitter.configs")
+      configs.setup({
+        ensure_installed = {
+          "hcl",
+          "typescript",
+        },
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+      })
+    end,
+  },
   { "neovim/nvim-lspconfig" }, -- Required
   { -- Optional
     "williamboman/mason.nvim",
