@@ -349,3 +349,4 @@ vim.opt.shiftwidth = 2
 vim.opt.number = true
 vim.opt.listchars="tab:▸▸,trail:-"
 vim.opt.list = true
+vim.opt.ignorecase = true
