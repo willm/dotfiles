@@ -14,6 +14,8 @@ formatter.setup({
     markdown = { prettier },
     javascript = { prettier },
     typescript = { prettier },
+    html = { prettier },
+    yaml = { prettier },
     rust = {
       function()
         return {
