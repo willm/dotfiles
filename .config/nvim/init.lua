@@ -92,6 +92,7 @@ local plugins = {
   "nvim-lua/plenary.nvim",
   "nvim-tree/nvim-web-devicons",
   "nvim-neo-tree/neo-tree.nvim",
+  "nvim-pack/nvim-spectre",
   config = function()
     require("neo-tree").setup({
       close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
@@ -341,6 +342,7 @@ local plugins = {
   { "hrsh7th/nvim-cmp" }, -- Required
   { "hrsh7th/cmp-nvim-lsp" }, -- Required
   { "L3MON4D3/LuaSnip" }, -- Required
+  { "simrat39/rust-tools.nvim" },
   "VonHeikemen/lsp-zero.nvim",
   branch = "v2.x",
 }
@@ -354,9 +356,31 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 -- (Optional) Configure lua language server for neovim
-require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
+local lspconfig = require("lspconfig")
+lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
+lspconfig.tsserver.setup({})
+lspconfig.rust_analyzer.setup({
+  -- Server-specific settings. See `:help lspconfig-setup`
+  settings = {
+    ["rust-analyzer"] = {},
+  },
+})
 
 lsp.setup()
+local rust_tools = require("rust-tools")
+
+rust_tools.setup({
+  server = {
+    on_attach = function(_, bufnr)
+      vim.keymap.set(
+        "n",
+        "<leader>ca",
+        rust_tools.hover_actions.hover_actions,
+        { buffer = bufnr }
+      )
+    end,
+  },
+})
 
 local telescope = require("telescope")
 local telescopeConfig = require("telescope.config")
@@ -399,3 +423,6 @@ vim.opt.number = true
 vim.opt.listchars = "tab:▸▸,trail:-"
 vim.opt.list = true
 vim.opt.ignorecase = true
+vim.opt_local.spell = true
+vim.opt.spelllang = "en,fr"
+vim.opt.spelloptions = "camel"

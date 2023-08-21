@@ -11,6 +11,7 @@ formatter.setup({
   filetype = {
     -- Formatter configurations for filetype "lua" go here
     -- and will be executed in order
+    markdown = { prettier },
     javascript = { prettier },
     typescript = { prettier },
     rust = {

@@ -47,14 +47,15 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-prompt npm grunt)
+plugins=(git git-prompt npm)
 
 source $ZSH/oh-my-zsh.sh
-source /home/will/.environment.sh
+source $HOME/.environment.sh
 
 # User configuration
 
 export PATH="./node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/will/.rvm/bin:/home/will/.rvm/bin:/home/will/.rvm/bin:/home/will/.rvm/bin"
+export PRETTIERD_DEFAULT_CONFIG="$HOME/.config/nvim/prettierrc.json"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -85,3 +86,6 @@ alias ack=ack-grep
 alias tmux="tmux -2"
 alias cls=clear
 alias "git commit"="git commit --verbose"
+alias uuid="python3 -c 'import uuid; print(uuid.uuid4())'"
+alias epoch="date +%s"
+alias ports="lsof -nP -iTCP -sTCP:LISTEN"
