@@ -89,3 +89,4 @@ alias "git commit"="git commit --verbose"
 alias uuid="python3 -c 'import uuid; print(uuid.uuid4())'"
 alias epoch="date +%s"
 alias ports="lsof -nP -iTCP -sTCP:LISTEN"
+alias vim=nvim

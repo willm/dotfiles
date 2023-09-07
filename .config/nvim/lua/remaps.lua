@@ -24,6 +24,20 @@ vim.keymap.set("n", "Y", "yy")
 
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {})
 
+-- copy to system clipboard more easily
+vim.keymap.set("n", "<leader>y", '"+y')
+vim.keymap.set("v", "<leader>y", '"+y')
+-- paste from system clipboard more easily
+vim.keymap.set("n", "<leader>p", '"+p')
+vim.keymap.set("v", "<leader>p", '"+p')
+
+vim.keymap.set(
+  "c",
+  "w!!",
+  "<esc>:lua require'sudo'.sudo_write()<CR>",
+  { silent = true }
+)
+
 local cmp = require("cmp")
 local cmp_action = require("lsp-zero").cmp_action()
 local snippy = require("snippy")

@@ -2,9 +2,9 @@
 	ui = true
 [user]
 	name = Will Munn
-	email = will.munn@focusrite.com
+	email = william.munn@zenika.com
 [core]
-	editor = vim -u NONE
+	editor = nvim
 	autocrlf = false
 	excludesfile = /Users/will.munn/.gitignore_global
     fileMode = true

@@ -415,6 +415,7 @@ telescope.setup({
 
 require("formatting")
 require("remaps")
+require("sudo")
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -426,3 +427,7 @@ vim.opt.ignorecase = true
 vim.opt_local.spell = true
 vim.opt.spelllang = "en,fr"
 vim.opt.spelloptions = "camel"
+vim.api.nvim_create_autocmd(
+  { "TermOpen", "WinEnter term://*" },
+  { command = "startinsert" }
+)
