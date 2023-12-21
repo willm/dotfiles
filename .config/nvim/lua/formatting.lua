@@ -15,6 +15,7 @@ formatter.setup({
     javascript = { prettier },
     typescript = { prettier },
     javascriptreact = { prettier },
+    typescriptreact = { prettier },
     html = { prettier },
     yaml = { prettier },
     rust = {
