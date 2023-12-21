@@ -421,17 +421,12 @@ require("formatting")
 require("debugging")
 require("remaps")
 require("sudo")
-vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
--- show line numbers
-vim.opt.number = true
-vim.opt.listchars = "tab:▸▸,trail:-"
-vim.opt.list = true
-vim.opt.ignorecase = true
-vim.opt_local.spell = true
-vim.opt.spelllang = "en,fr"
-vim.opt.spelloptions = "camel"
+require("options")
+
+vim.api.nvim_create_autocmd(
+  { "BufRead", "BufNewFile" },
+  { pattern = "*.tf", command = "set filetype=hcl" }
+)
 
 -- terminal helpers
 
