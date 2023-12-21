@@ -127,7 +127,7 @@ rust_tools.setup({
 require("formatting")
 require("debugging")
 require("remaps")
-require("sudo")
+require("features.sudo")
 require("options")
 require("features.terminal")
 

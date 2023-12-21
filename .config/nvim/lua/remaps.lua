@@ -27,13 +27,6 @@ vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>p", '"+p')
 vim.keymap.set("v", "<leader>p", '"+p')
 
-vim.keymap.set(
-  "c",
-  "w!!",
-  "<esc>:lua require'sudo'.sudo_write()<CR>",
-  { silent = true }
-)
-
 local cmp = require("cmp")
 local cmp_action = require("lsp-zero").cmp_action()
 local snippy = require("snippy")

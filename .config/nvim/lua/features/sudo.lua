@@ -72,4 +72,11 @@ Sudo.sudo_write = function(tmpfile, filepath)
   vim.fn.delete(tmpfile)
 end
 
+vim.keymap.set(
+  "c",
+  "w!!",
+  "<esc>:lua require'features.sudo'.sudo_write()<CR>",
+  { silent = true }
+)
+
 return Sudo
