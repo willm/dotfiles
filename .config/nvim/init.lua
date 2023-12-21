@@ -338,13 +338,15 @@ local plugins = {
     end,
   },
   "williamboman/mason-lspconfig.nvim",
-  "neovim/nvim-lspconfig",
   { "hrsh7th/nvim-cmp" }, -- Required
   { "hrsh7th/cmp-nvim-lsp" }, -- Required
   { "L3MON4D3/LuaSnip" }, -- Required
   { "simrat39/rust-tools.nvim" },
   "VonHeikemen/lsp-zero.nvim",
   branch = "v2.x",
+  "chrisbra/Colorizer",
+  "mfussenegger/nvim-dap",
+  "rcarriga/nvim-dap-ui",
 }
 require("lazy").setup(plugins)
 
@@ -357,18 +359,20 @@ end)
 
 -- (Optional) Configure lua language server for neovim
 local lspconfig = require("lspconfig")
+local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
-lspconfig.tsserver.setup({})
+lspconfig.tsserver.setup({ capabilities = lsp_capabilities })
 lspconfig.rust_analyzer.setup({
   -- Server-specific settings. See `:help lspconfig-setup`
+  capabilities = { capabilities = lsp_capabilities },
   settings = {
     ["rust-analyzer"] = {},
   },
 })
 
 lsp.setup()
-local rust_tools = require("rust-tools")
 
+local rust_tools = require("rust-tools")
 rust_tools.setup({
   server = {
     on_attach = function(_, bufnr)
@@ -414,6 +418,7 @@ telescope.setup({
 })
 
 require("formatting")
+require("debugging")
 require("remaps")
 require("sudo")
 vim.opt.expandtab = true
