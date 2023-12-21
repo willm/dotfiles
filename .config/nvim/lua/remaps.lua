@@ -1,9 +1,5 @@
 vim.keymap.set("n", "<F2>", "<cmd>Neotree toggle<cr>")
 
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<C-p>", builtin.find_files, {})
-vim.keymap.set("n", "<C-f>", builtin.grep_string, {})
-
 vim.keymap.set("i", "jj", "<Esc>")
 vim.keymap.set("t", "jj", "<C-\\><C-n>")
 
