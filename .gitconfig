@@ -15,8 +15,10 @@
 [rebase]
 	instructionFormat = (%an <%ae>) %s
 [alias]
-    am = commit --amend --no-edit
+	am = commit --amend --no-edit
 	fixup = commit --amend --no-edit
+	co = checkout
+	fp = push --force-with-lease
 [pull]
 	rebase = false
 [init]
@@ -25,3 +27,10 @@
 	hide-dirty = 1
 [rerere]
 	enabled = true
+[merge]
+	tool = nvimdiff
+	conflictstyle = diff3
+[diff]
+	tool = nvimdiff
+[mergetool]
+	keepBackup = false
