@@ -82,6 +82,9 @@ export PRETTIERD_DEFAULT_CONFIG="$HOME/.config/nvim/prettierrc.json"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+export LS_OPTIONS='--color=auto'
+alias ls='ls $LS_OPTIONS'
 alias tmux="tmux -2"
 alias cls=clear
 alias "git commit"="git commit --verbose"
@@ -94,6 +97,10 @@ alias copy='xclip -selection clipboard'
 alias ack=rg
 alias k=kubectl
 alias ll='ls -al'
+
+
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
 
 
 function cd() {
