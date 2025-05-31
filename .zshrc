@@ -114,3 +114,4 @@ function cd() {
       fi
   fi
 }
+eval "$(/home/will/.local/bin/mise activate zsh)"
