@@ -2,12 +2,11 @@
 	ui = true
 [user]
 	name = Will Munn
-	email = william.munn@zenika.com
 [core]
 	editor = nvim
 	autocrlf = false
 	excludesfile = /Users/will.munn/.gitignore_global
-    fileMode = true
+	fileMode = true
 [help]
 	autocorrect = 1
 [push]
