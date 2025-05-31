@@ -20,7 +20,6 @@ formatter.setup({
     json = { prettier },
     python = { ruff },
     html = { prettier },
-    yaml = { prettier },
     rust = {
       function()
         return {
