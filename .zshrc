@@ -90,3 +90,22 @@ alias uuid="python3 -c 'import uuid; print(uuid.uuid4())'"
 alias epoch="date +%s"
 alias ports="lsof -nP -iTCP -sTCP:LISTEN"
 alias vim=nvim
+
+function cd() {
+  builtin cd "$@"
+
+  if [[ -z "$VIRTUAL_ENV" ]] ; then
+    ## If env folder is found then activate the vitualenv
+      if [[ -d ./.venv ]] ; then
+        source ./.venv/bin/activate
+      fi
+  else
+    ## check the current folder belongs to earlier VIRTUAL_ENV folder
+    # if yes then do nothing
+    # else deactivate
+      parentdir="$(dirname "$VIRTUAL_ENV")"
+      if [[ "$PWD"/ != "$parentdir"/* ]] ; then
+        deactivate
+      fi
+  fi
+}
