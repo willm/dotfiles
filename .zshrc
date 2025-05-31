@@ -1,6 +1,16 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# Use powerline
+USE_POWERLINE="true"
+ Source manjaro-zsh-configuration
+if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
+  source /usr/share/zsh/manjaro-zsh-config
+fi
+# Use manjaro zsh prompt
+if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
+  source /usr/share/zsh/manjaro-zsh-prompt
+fi
+
 set -o vi
+unsetopt correct
 # vim editing in command terminal
 
 # Set name of the theme to load.
@@ -49,12 +59,11 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git git-prompt npm)
 
-source $ZSH/oh-my-zsh.sh
-source $HOME/.environment.sh
+source $HOME/.cargo/env
 
 # User configuration
 
-export PATH="./node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/will/.rvm/bin:/home/will/.rvm/bin:/home/will/.rvm/bin:/home/will/.rvm/bin"
+export PATH="./node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/will/.rvm/bin:/home/will/.rvm/bin:/home/will/.rvm/bin:/home/will/.rvm/bin:/home/will/.cargo/bin:/home/will/scripts"
 export PRETTIERD_DEFAULT_CONFIG="$HOME/.config/nvim/prettierrc.json"
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -98,10 +107,24 @@ alias ack=rg
 alias k=kubectl
 alias ll='ls -al'
 
+# pnpm
+export PNPM_HOME="/home/will/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/will/google-cloud-sdk/path.zsh.inc' ]; then . '/home/will/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/will/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/will/google-cloud-sdk/completion.zsh.inc'; fi
 
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
+source $HOME/.environment.sh
+eval $(luarocks path)
 
 function cd() {
   builtin cd "$@"
