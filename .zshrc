@@ -82,14 +82,19 @@ export PRETTIERD_DEFAULT_CONFIG="$HOME/.config/nvim/prettierrc.json"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias ack=ack-grep
 alias tmux="tmux -2"
 alias cls=clear
 alias "git commit"="git commit --verbose"
 alias uuid="python3 -c 'import uuid; print(uuid.uuid4())'"
 alias epoch="date +%s"
 alias ports="lsof -nP -iTCP -sTCP:LISTEN"
-alias vim=nvim
+alias vim=flatnvim
+alias cat=bat
+alias copy='xclip -selection clipboard'
+alias ack=rg
+alias k=kubectl
+alias ll='ls -al'
+
 
 function cd() {
   builtin cd "$@"
