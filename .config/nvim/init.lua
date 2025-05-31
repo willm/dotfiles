@@ -32,15 +32,12 @@ local plugins = {
       vim.cmd.colorscheme("kanagawa")
     end,
   },
-  "MunifTanjim/nui.nvim",
-  "dcampos/nvim-snippy",
-  "dcampos/cmp-snippy",
-  "mhartington/formatter.nvim",
-  "nvim-lua/plenary.nvim",
-  "nvim-tree/nvim-web-devicons",
-  "nvim-pack/nvim-spectre",
-  require("plugins.neo-tree"),
-  "MichaHoffmann/tree-sitter-hcl",
+  { "dcampos/nvim-snippy" },
+  { "dcampos/cmp-snippy" },
+  { "mhartington/formatter.nvim" },
+  { "nvim-lua/plenary.nvim" },
+  { "nvim-pack/nvim-spectre" },
+  { "MichaHoffmann/tree-sitter-hcl" },
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -51,6 +48,8 @@ local plugins = {
       })
     end,
   },
+  { "hrsh7th/nvim-cmp" },
+  require("plugins.neo-tree"),
   require("plugins.telescope"),
   {
     "nvim-treesitter/nvim-treesitter",
@@ -60,6 +59,9 @@ local plugins = {
         ensure_installed = {
           "hcl",
           "typescript",
+          "python",
+          "rust",
+          "groovy",
         },
         highlight = {
           enable = true,
@@ -68,23 +70,24 @@ local plugins = {
       })
     end,
   },
-  { "neovim/nvim-lspconfig" }, -- Required
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      { "hrsh7th/cmp-nvim-lsp" }, -- Required
+      { "williamboman/mason-lspconfig.nvim" },
+    },
+  }, -- Required
   { -- Optional
     "williamboman/mason.nvim",
     build = function()
       pcall(vim.cmd, "MasonUpdate")
     end,
   },
-  "williamboman/mason-lspconfig.nvim",
-  { "hrsh7th/nvim-cmp" }, -- Required
-  { "hrsh7th/cmp-nvim-lsp" }, -- Required
   { "L3MON4D3/LuaSnip" }, -- Required
   { "simrat39/rust-tools.nvim" },
-  "VonHeikemen/lsp-zero.nvim",
-  branch = "v2.x",
-  "chrisbra/Colorizer",
-  "mfussenegger/nvim-dap",
-  "rcarriga/nvim-dap-ui",
+  { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
+  { "chrisbra/Colorizer" },
+  { "MaxMEllon/vim-jsx-pretty" },
 }
 require("lazy").setup(plugins)
 
@@ -99,7 +102,14 @@ end)
 local lspconfig = require("lspconfig")
 local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
-lspconfig.tsserver.setup({ capabilities = lsp_capabilities })
+lspconfig.ts_ls.setup({ capabilities = lsp_capabilities })
+lspconfig.groovyls.setup({
+  cmd = {
+    "java",
+    "-jar",
+    "/home/will/code/me/groovy-language-server/build/libs/groovy-language-server-all.jar",
+  },
+})
 lspconfig.rust_analyzer.setup({
   -- Server-specific settings. See `:help lspconfig-setup`
   capabilities = { capabilities = lsp_capabilities },
@@ -107,6 +117,9 @@ lspconfig.rust_analyzer.setup({
     ["rust-analyzer"] = {},
   },
 })
+lspconfig.pyright.setup({ settings = {
+  typeCheckingMode = "basic",
+} })
 
 lsp.setup()
 
@@ -125,13 +138,19 @@ rust_tools.setup({
 })
 
 require("formatting")
-require("debugging")
 require("remaps")
 require("features.sudo")
 require("options")
 require("features.terminal")
+require("features.marp")
 
 vim.api.nvim_create_autocmd(
   { "BufRead", "BufNewFile" },
   { pattern = "*.tf", command = "set filetype=hcl" }
 )
+
+vim.api.nvim_create_autocmd(
+  { "BufRead", "BufNewFile" },
+  { pattern = "Jenkinsfile", command = "set filetype=groovy" }
+)
+--require("config.lazy")

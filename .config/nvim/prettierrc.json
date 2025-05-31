@@ -2,10 +2,18 @@
   "trailingComma": "es5",
   "tabWidth": 2,
   "semi": true,
-  "singleQuote": true,
+  "singleQuote": false,
   "bracketSpacing": false,
   "quoteProps": "consistent",
   "arrowParens": "always",
   "printWidth": 80,
-  "proseWrap": "always"
+  "proseWrap": "always",
+  "overrides": [
+    {
+      "files": ["*.yaml"],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
 }

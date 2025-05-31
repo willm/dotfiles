@@ -2,6 +2,7 @@ local util = require("formatter.util")
 -- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
 local formatter = require("formatter")
 local prettier = require("formatter.defaults.prettierd")
+local ruff = require("formatter.filetypes.python").ruff
 formatter.setup({
   -- Enable or disable logging
   logging = true,
@@ -16,6 +17,8 @@ formatter.setup({
     typescript = { prettier },
     javascriptreact = { prettier },
     typescriptreact = { prettier },
+    json = { prettier },
+    python = { ruff },
     html = { prettier },
     yaml = { prettier },
     rust = {
@@ -81,3 +84,4 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   end,
   desc = "Format on save",
 })
+require("mason").setup()

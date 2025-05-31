@@ -12,3 +12,9 @@ vim.opt.spelloptions = "camel"
 -- Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
+vim.o.wrap = true
+-- local config
+vim.o.exrc = true
+vim.o.secure = true
+-- whitespace chars
+vim.o.listchars = "tab:>·,trail:~,extends:>,precedes:<,space:."

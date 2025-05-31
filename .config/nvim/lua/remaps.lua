@@ -26,6 +26,11 @@ vim.keymap.set("v", "<leader>y", '"+y')
 -- paste from system clipboard more easily
 vim.keymap.set("n", "<leader>p", '"+p')
 vim.keymap.set("v", "<leader>p", '"+p')
+vim.keymap.set("t", "<leader>p", '"+p')
+
+--next and previous buffer navigation
+vim.keymap.set("n", "[b", "<cmd>bprev<cr>")
+vim.keymap.set("n", "]b", "<cmd>bnext<cr>")
 
 local cmp = require("cmp")
 local cmp_action = require("lsp-zero").cmp_action()
