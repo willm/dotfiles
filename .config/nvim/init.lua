@@ -84,66 +84,19 @@ local plugins = {
     end,
   },
   { "L3MON4D3/LuaSnip" }, -- Required
-  { "simrat39/rust-tools.nvim" },
   { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
   { "chrisbra/Colorizer" },
   { "MaxMEllon/vim-jsx-pretty" },
 }
 require("lazy").setup(plugins)
 
-local lsp = require("lsp-zero").preset({})
-
-lsp.on_attach(function(client, bufnr)
-  client.server_capabilities.semanticTokensProvider = nil
-  lsp.default_keymaps({ buffer = bufnr })
-end)
-
--- (Optional) Configure lua language server for neovim
-local lspconfig = require("lspconfig")
-local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
-lspconfig.ts_ls.setup({ capabilities = lsp_capabilities })
-lspconfig.groovyls.setup({
-  cmd = {
-    "java",
-    "-jar",
-    "/home/will/code/me/groovy-language-server/build/libs/groovy-language-server-all.jar",
-  },
-})
-lspconfig.rust_analyzer.setup({
-  -- Server-specific settings. See `:help lspconfig-setup`
-  capabilities = { capabilities = lsp_capabilities },
-  settings = {
-    ["rust-analyzer"] = {},
-  },
-})
-lspconfig.pyright.setup({ settings = {
-  typeCheckingMode = "basic",
-} })
-
-lsp.setup()
-
-local rust_tools = require("rust-tools")
-rust_tools.setup({
-  server = {
-    on_attach = function(_, bufnr)
-      vim.keymap.set(
-        "n",
-        "<leader>ca",
-        rust_tools.hover_actions.hover_actions,
-        { buffer = bufnr }
-      )
-    end,
-  },
-})
-
+require("features.lsp")
 require("formatting")
 require("remaps")
 require("features.sudo")
 require("options")
 require("features.terminal")
 require("features.marp")
-
 vim.api.nvim_create_autocmd(
   { "BufRead", "BufNewFile" },
   { pattern = "*.tf", command = "set filetype=hcl" }
@@ -153,4 +106,3 @@ vim.api.nvim_create_autocmd(
   { "BufRead", "BufNewFile" },
   { pattern = "Jenkinsfile", command = "set filetype=groovy" }
 )
---require("config.lazy")
