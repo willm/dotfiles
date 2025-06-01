@@ -1,4 +1,12 @@
-vim.lsp.enable({ "ts_ls", "lua_ls", "groovyls", "pyright" })
+require("mason").setup()
+vim.lsp.enable({
+  "ts_ls",
+  "lua_ls",
+  "groovyls",
+  "pyright",
+  "bashls",
+  "terraformls",
+})
 vim.lsp.config("groovyls", {
   cmd = {
     "java",

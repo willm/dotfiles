@@ -83,8 +83,6 @@ local plugins = {
       pcall(vim.cmd, "MasonUpdate")
     end,
   },
-  { "L3MON4D3/LuaSnip" }, -- Required
-  { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
   { "chrisbra/Colorizer" },
   { "MaxMEllon/vim-jsx-pretty" },
 }
