@@ -1,6 +1,5 @@
 # Use powerline
 USE_POWERLINE="true"
- Source manjaro-zsh-configuration
 if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
   source /usr/share/zsh/manjaro-zsh-config
 fi
@@ -63,7 +62,7 @@ source $HOME/.cargo/env
 
 # User configuration
 
-export PATH="./node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/will/.rvm/bin:/home/will/.rvm/bin:/home/will/.rvm/bin:/home/will/.rvm/bin:/home/will/.cargo/bin:/home/will/scripts"
+export PATH="./node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/will/.rvm/bin:/home/will/.rvm/bin:/home/will/.rvm/bin:/home/will/.rvm/bin:/home/will/.cargo/bin:/home/will/go/bin:/home/will/scripts"
 export PRETTIERD_DEFAULT_CONFIG="$HOME/.config/nvim/prettierrc.json"
 # export MANPATH="/usr/local/man:$MANPATH"
 

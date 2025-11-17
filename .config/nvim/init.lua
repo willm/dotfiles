@@ -57,6 +57,7 @@ local plugins = {
       local configs = require("nvim-treesitter.configs")
       configs.setup({
         ensure_installed = {
+          "html",
           "hcl",
           "typescript",
           "python",
@@ -76,8 +77,8 @@ local plugins = {
       { "hrsh7th/cmp-nvim-lsp" }, -- Required
       { "williamboman/mason-lspconfig.nvim" },
     },
-  }, -- Required
-  { -- Optional
+  },
+  {
     "williamboman/mason.nvim",
     build = function()
       pcall(vim.cmd, "MasonUpdate")
@@ -95,6 +96,7 @@ require("features.sudo")
 require("options")
 require("features.terminal")
 require("features.marp")
+require("ui")
 vim.api.nvim_create_autocmd(
   { "BufRead", "BufNewFile" },
   { pattern = "*.tf", command = "set filetype=hcl" }
