@@ -6,7 +6,8 @@ vim.opt.number = true
 vim.opt.listchars = "tab:▸▸,trail:-"
 vim.opt.list = true
 vim.opt.ignorecase = true
-vim.opt_local.spell = true
+-- opt_local here only ever applied to the single window that existed at startup
+vim.opt.spell = true
 vim.opt.spelllang = "en,fr"
 vim.opt.spelloptions = "camel"
 -- Case insensitive searching UNLESS /C or capital in search
