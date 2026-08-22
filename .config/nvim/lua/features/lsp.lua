@@ -6,6 +6,7 @@ vim.lsp.enable({
   "pyright",
   "bashls",
   "terraformls",
+  "rust_analyzer",
 })
 vim.lsp.config("groovyls", {
   cmd = {
@@ -13,17 +14,73 @@ vim.lsp.config("groovyls", {
     "-jar",
     "/home/will/code/me/groovy-language-server/build/libs/groovy-language-server-all.jar",
   },
+  -- Run single-file only: never send a rootUri. On initialize the server walks
+  -- the whole workspace for *.groovy (CompilationUnitFactory.create), and its
+  -- `catch (IOException)` cannot catch the UncheckedIOException that Files.walk
+  -- throws on an unreadable directory, so any root-owned dir in the tree (e.g. a
+  -- mysql container volume) kills the server with an InternalError. With no
+  -- rootUri, setWorkspaceRoot is skipped and only open files are compiled.
+  -- Trade-off: no cross-file definitions or workspace symbols.
+  --
+  -- This has to happen in before_init rather than via root_dir: returning no
+  -- root from root_dir just makes vim.lsp.start() fall back to `root_markers`
+  -- (lsp.lua:745), which nvim-lspconfig sets to { 'Jenkinsfile', '.git' }.
+  -- GroovyLanguageServer.initialize only ever reads rootUri, so clearing it is
+  -- enough; rootPath and workspaceFolders are ignored by the server.
+  before_init = function(params)
+    params.rootUri = vim.NIL
+    params.rootPath = vim.NIL
+  end,
 })
+-- rust-analyzer reads everything under settings["rust-analyzer"]; options at the
+-- top level are silently ignored.
+vim.lsp.config("rust_analyzer", {
+  settings = {
+    ["rust-analyzer"] = {
+      imports = {
+        granularity = {
+          group = "module",
+        },
+        prefix = "self",
+      },
+      cargo = {
+        buildScripts = {
+          enable = true,
+        },
+      },
+      procMacro = {
+        enable = true,
+      },
+    },
+  },
+})
+
 vim.lsp.config("pyright", {
   settings = {
-    typeCheckingMode = "basic",
+    python = {
+      analysis = {
+        typeCheckingMode = "basic",
+      },
+    },
   },
+})
+
+-- Advertise nvim-cmp's completion capabilities to every server.
+vim.lsp.config("*", {
+  capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "LSP actions",
   callback = function(event)
     local opts = { buffer = event.buf }
+
+    -- Replaces the old rust_analyzer-only on_attach, which clobbered the one
+    -- nvim-lspconfig ships (it registers the :LspRustAnalyzer* commands).
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if client and client:supports_method("textDocument/inlayHint") then
+      vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+    end
 
     vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
     vim.keymap.set("n", ";", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)

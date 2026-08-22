@@ -29,7 +29,7 @@ formatter.setup({
         }
       end,
     },
-    hcl = {
+    terraform = {
       function()
         return {
           exe = "terraform",
