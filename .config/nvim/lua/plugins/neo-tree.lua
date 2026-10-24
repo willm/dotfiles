@@ -78,7 +78,20 @@ return {
       -- A list of functions, each representing a global custom command
       -- that will be available in all sources (if not overridden in `opts[source_name].commands`)
       -- see `:h neo-tree-global-custom-commands`
-      commands = {},
+      commands = {
+        copy_path_to_clipboard = function(state)
+          local node = state.tree:get_node()
+          local path = node:get_id()
+          local root = state.path
+          local relative = path:sub(#root + 2)
+          if relative == "" then
+            relative = "."
+          end
+          vim.fn.setreg('"', relative) -- unnamed register
+          vim.fn.setreg("+", relative) -- system clipboard
+          vim.notify("Copied path: " .. relative)
+        end,
+      },
       window = {
         position = "left",
         width = 40,
@@ -95,6 +108,7 @@ return {
           ["<cr>"] = "open",
           ["<esc>"] = "revert_preview",
           ["P"] = { "toggle_preview", config = { use_float = true } },
+          ["Y"] = "copy_path_to_clipboard",
           ["l"] = "focus_preview",
           ["S"] = "open_split",
           ["s"] = "open_vsplit",
