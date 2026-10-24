@@ -31,8 +31,10 @@
 keybind = shift+ctrl+l=goto_split:right
 keybind = shift+ctrl+h=goto_split:left
 keybind = shift+ctrl+k=goto_split:up
+keybind = shift+ctrl+j=goto_split:down
 keybind = shift+ctrl+r=new_split:right
-keybind = shift+ctrl+d=new_split:down
+keybind = shift+ctrl+d=new_split:right
+keybind = shift+ctrl+r=new_split:right
 # # Spacing around the equals sign does not matter.
 # # All of these are identical:
 # key=value
