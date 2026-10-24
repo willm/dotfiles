@@ -95,6 +95,7 @@ alias copy='xclip -selection clipboard'
 alias ack=rg
 alias k=kubectl
 alias ll='ls -al'
+alias claude='sbx run claude'
 
 # pnpm
 export PNPM_HOME="/home/will/.local/share/pnpm"

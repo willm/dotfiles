@@ -1,6 +1,6 @@
 return {
   "nvim-telescope/telescope.nvim",
-  tag = "0.1.2",
+  tag = "v0.2.2",
   config = function()
     local telescope = require("telescope")
     local telescopeConfig = require("telescope.config")
