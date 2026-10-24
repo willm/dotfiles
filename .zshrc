@@ -104,11 +104,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/will/google-cloud-sdk/path.zsh.inc' ]; then . '/home/will/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/will/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/will/google-cloud-sdk/completion.zsh.inc'; fi
 
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
@@ -135,3 +130,6 @@ function cd() {
   fi
 }
 eval "$(/home/will/.local/bin/mise activate zsh)"
+
+## [/Completion]
+eval "$(zoxide init zsh)"
